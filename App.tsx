@@ -2,14 +2,34 @@ import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import StartScreen from "./screens/StartScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import GameScreen from "./screens/GameScreen";
 import colors from "./constants/colors";
 import GameOverScreen from "./screens/GameOverScreen";
+import * as SplashScreen from "expo-splash-screen";
+
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
   const [isGameOver, setIsGameOver] = useState(false);
+
+  const [isFontLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold,
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (isFontLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [isFontLoaded]);
 
   function pickedNumberHandler(n: number) {
     setUserNumber(n);
@@ -35,6 +55,7 @@ export default function App() {
       <LinearGradient
         colors={[colors.primary900, colors.accent500]}
         style={styles.screen}
+        onLayout={onLayoutRootView}
       >
         <ImageBackground
           source={require("./assets/images/background.png")}
