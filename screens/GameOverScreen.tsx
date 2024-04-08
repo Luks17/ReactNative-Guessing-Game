@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import Title from "../components/ui/Title";
 import colors from "../constants/colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import { screenSm } from "../constants/device";
 
 interface Props {
   roundsNumber: number;
@@ -40,12 +41,12 @@ const styles = StyleSheet.create({
     rowGap: 30,
   },
   imgContainer: {
-    width: 300,
-    height: 300,
+    width: screenSm ? 200 : 300,
+    height: screenSm ? 200 : 300,
+    borderRadius: screenSm ? 100 : 150,
     overflow: "hidden",
     borderWidth: 3,
     borderColor: colors.primary700,
-    borderRadius: 150,
     margin: 36,
   },
   image: {

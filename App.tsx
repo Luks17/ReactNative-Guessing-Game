@@ -14,23 +14,23 @@ import {
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
   const [rounds, setRounds] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  const [isFontLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (isFontLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [isFontLoaded]);
+  // const [isFontLoaded] = useFonts({
+  //   Inter_400Regular,
+  //   Inter_700Bold,
+  // });
+  //
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (isFontLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [isFontLoaded]);
 
   function pickedNumberHandler(n: number) {
     setUserNumber(n);
@@ -67,7 +67,7 @@ export default function App() {
       <LinearGradient
         colors={[colors.primary900, colors.accent500]}
         style={styles.screen}
-        onLayout={onLayoutRootView}
+        // onLayout={onLayoutRootView}
       >
         <ImageBackground
           source={require("./assets/images/background.png")}
